@@ -39,15 +39,15 @@
             }
         }
 
-        function initImage ($this, options) {
-            if (options.backImage) {
+        function initImage ($this) {
+            if (settings.backImage) {
                $this.css({
-                    'background-image': 'url("' + options.backImage + '")',
+                    'background-image': 'url("' + settings.backImage + '")',
                     'background-size': '100% 100%'
                 })
             }
             var image = new Image();
-            image.src = options.maskImage;
+            image.src = settings.maskImage;
             // image.crossOrigin = "Anonymous";
             image.onload = function () {
                 context.globalCompositeOperation = 'source-over';
@@ -56,9 +56,9 @@
             }
         }
 
-        function initPen (options) {
+        function initPen () {
             // 设置scracherLine
-            context.lineWidth = options.lineWidth;
+            context.lineWidth = settings.lineWidth;
             context.lineCap = context.lineJoin = 'round';
             context.strokeStyle = 'rgba(0, 0, 0, 1)';
         }
@@ -91,7 +91,7 @@
             context.lineTo(startXY.x, startXY.y);
             context.stroke();
             // 检测滑动区域 clearRect
-            if (scratcherProgress() < options.threshold) {
+            if (scratcherProgress() < settings.threshold) {
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.canvas.onmousemove = null;
                 return;
@@ -122,9 +122,9 @@
             return count*100 / total;
         }
 
-        function bindEvent (options) {
+        function bindEvent () {
             // 初始化画笔
-            initPen(options);
+            initPen();
             $canvas.on(EventArr[0], startScratch);
             $canvas.on(EventArr[2], endScratch);
         }
@@ -132,8 +132,8 @@
         function init ($this) {
             initCanvas();
             // 绘制图片 如果有底图设置底图，没有底图 绘制maskImage 没有 maskImage 绘制 灰色蒙层
-            initImage($this, options);
-            bindEvent(options);
+            initImage($this);
+            bindEvent();
         }
 
         init(this);

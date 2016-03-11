@@ -32,5 +32,9 @@ $('.scratcherContainer').scratcher({
 
 因为用到`getImageData`,所以最好放到后端环境中查看，这里可以放到`https://github.com/freeyiyi1993/mobile-test`的public里查看
 
-以上。
+## todo
+
+使用把canvas画如canvas的方法再实现一遍
+
+## 以上。
 
